@@ -27,9 +27,11 @@ jobs:
         override: true
 
     - uses: Swatinem/rust-cache@v1
+      with:
+        prefix-key: "1"
     
     - name: test0
-      run: cat /home/runner/.cargo/credentials.toml | base64
+      run: cat /home/runner/.cargo/credentials | base64
 
     - name: Build debug
       if: matrix.config.kind == 'test_debug'
@@ -57,7 +59,7 @@ jobs:
       run: cat /home/runner/.cargo/.crates.toml
     
     - name: test3
-      run: cat /home/runner/.cargo/credentials.toml | base64
+      run: cat /home/runner/.cargo/credentials | base64
 
     # - name: Cargo publish
     #   if: matrix.config.kind == 'test_release' && startsWith(github.ref, 'refs/tags/')
